@@ -1,0 +1,788 @@
+/* =========================================
+   1. IMPORTS & VARIABLES
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+    /* Color Palette */
+    --bg-body: #0f172a;       /* Deep Slate */
+    --bg-surface: #1e293b;    /* Lighter Slate for Cards */
+    --accent-primary: #0ea5e9; /* Electric Cyan (Change to #10b981 for Emerald) */
+    --accent-hover: #0284c7;   /* Darker Cyan for button hovers */
+    --text-heading: #f8fafc;   /* Crisp Off-White */
+    --text-body: #cbd5e1;      /* Muted Silver */
+    
+    /* Typography */
+    --font-main: 'Inter', sans-serif;
+    --font-code: 'Fira Code', monospace;
+    
+    /* Layout & Animation */
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 8px;
+}
+
+/* =========================================
+   2. RESET & BASE STYLES
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for nav links */
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-body);
+    font-family: var(--font-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+    color: var(--text-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--text-heading);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================================
+   3. NAVIGATION (Glassmorphism)
+   ========================================= */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px); /* Glassmorphism effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--accent-primary);
+}
+
+/* =========================================
+   4. HERO SECTION
+   ========================================= */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    padding-top: 80px; /* Offset for fixed header */
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 0.5rem;
+}
+
+.hero-content h2 {
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    color: var(--accent-primary);
+    font-family: var(--font-code);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-inline: auto;
+}
+
+/* BUTTONS */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.primary-btn {
+    background-color: var(--accent-primary);
+    color: var(--bg-body);
+}
+
+.primary-btn:hover {
+    background-color: var(--accent-hover);
+    color: var(--bg-body);
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: var(--text-heading);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondary-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+/* =========================================
+   5. SECTIONS & GRIDS
+   ========================================= */
+section {
+    padding: 6rem 0;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+/* Custom underline for section headers */
+section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--accent-primary);
+    margin: 1rem auto 0;
+    border-radius: 2px;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Replace the old .skill-category ul/li CSS with this */
+
+.skill-category {
+    background: linear-gradient(145deg, var(--bg-surface) 0%, rgba(30, 41, 59, 0.4) 100%);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.skill-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+.skill-badges span {
+    background: rgba(14, 165, 233, 0.05);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    color: var(--text-heading);
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+    cursor: default;
+}
+
+.skill-badges span:hover {
+    background: var(--accent-primary);
+    color: var(--bg-body);
+    transform: translateY(-2px);
+}
+
+/* Custom bullet points */
+.skill-category li::before {
+    content: '▹';
+    color: var(--accent-primary);
+    position: absolute;
+    left: 0;
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* =========================================
+   SERVICES SECTION STYLES
+   ========================================= */
+.section-subtitle {
+    text-align: center;
+    max-width: 600px;
+    margin: -1.5rem auto 3rem auto;
+    font-size: 1.05rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.service-card {
+    background: var(--bg-surface);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+/* Subtle glowing hover effect */
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5);
+    border-color: rgba(14, 165, 233, 0.4);
+}
+
+.service-icon {
+    background: rgba(14, 165, 233, 0.1);
+    color: var(--accent-primary);
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.service-header h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.starting-price {
+    display: inline-block;
+    font-family: var(--font-code);
+    color: var(--accent-primary);
+    font-size: 0.9rem;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+}
+
+.service-card p {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.service-features {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex-grow: 1; /* Pushes the button to the bottom */
+}
+
+.service-features li {
+    position: relative;
+    padding-left: 1.8rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: var(--text-heading);
+}
+
+/* Custom Checkmark for features */
+.service-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-primary);
+    font-weight: bold;
+}
+
+.service-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+}
+
+/* =========================================
+   ABOUT SECTION STYLES
+   ========================================= */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+/* Image Styling */
+.about-image-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+/* The subtle background glow behind the image */
+.about-image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius);
+    z-index: -1;
+    transition: var(--transition);
+}
+
+.about-image-wrapper:hover::before {
+    top: 20px;
+    left: 20px;
+}
+
+.image-placeholder, .profile-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-family: var(--font-code);
+    font-size: 0.9rem;
+}
+
+/* Text & Button Styling */
+.about-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+}
+
+.about-actions {
+    margin-top: 2rem;
+}
+
+.resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem 1.8rem;
+}
+
+.resume-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.resume-btn:hover svg {
+    transform: translateY(2px);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .about-image-wrapper {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .about-text {
+        text-align: center;
+    }
+    
+    .about-actions {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* =========================================
+   6. CARDS (Hover Effects & Pills)
+   ========================================= */
+.project-card {
+    background: var(--bg-surface);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Adds a subtle top-border highlight */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 
+                0 0 20px rgba(14, 165, 233, 0.15); /* The Cyan Glow */
+    border-color: rgba(14, 165, 233, 0.3);
+}
+
+.project-card:hover::before {
+    transform: scaleX(1);
+}
+
+.project-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.project-card p {
+    flex-grow: 1; /* Pushes the tech stack to the bottom */
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Tech Stack Pills */
+.tech-stack {
+    font-family: var(--font-code);
+    font-size: 0.8rem;
+    color: var(--accent-primary);
+    background: rgba(14, 165, 233, 0.1); /* 10% opacity of accent color */
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+/* =========================================
+   CONTACT SECTION & FORM STYLES
+   ========================================= */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+/* Contact Details Side */
+.contact-card {
+    background: var(--bg-surface);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-item .icon {
+    font-size: 1.5rem;
+    background: rgba(14, 165, 233, 0.1);
+    padding: 0.8rem;
+    border-radius: 12px;
+}
+
+.contact-item h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.social-links a {
+    font-family: var(--font-code);
+    font-size: 0.9rem;
+}
+
+.divider {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* The Premium Form Side */
+.premium-form {
+    background: var(--bg-surface);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-heading);
+    font-weight: 500;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: var(--bg-body);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: var(--text-body);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+/* Custom Dropdown Arrow styling */
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23cbd5e1%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Premium Focus Glow */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 1rem;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.form-success-msg {
+    margin-top: 1rem;
+    text-align: center;
+    color: #10b981; /* Emerald green */
+    font-family: var(--font-code);
+    font-size: 0.9rem;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .form-group.row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+/* =========================================
+   7. FOOTER & MISC
+   ========================================= */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+    margin-top: 4rem;
+}
+
+.contact-info {
+    margin-top: 2rem;
+    font-family: var(--font-code);
+    text-align: center;
+}
+
+.contact-info p {
+    margin-bottom: 0.5rem;
+}
+
+/* =========================================
+   8. RESPONSIVE DESIGN
+   ========================================= */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    section {
+        padding: 4rem 0;
+    }
+}
+
+/* =========================================
+   9. JAVASCRIPT ANIMATIONS & MOBILE MENU
+   ========================================= */
+
+/* Scroll Reveal Initial State */
+.skill-category, .project-card, .services-section p {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scroll Reveal Active State (Added by JS) */
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Menu Button - Hidden on Desktop */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001; /* Keep above the menu */
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--text-heading);
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Mobile Menu Adjustments */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block; /* Show hamburger on mobile */
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        clip-path: circle(0% at top right); /* Hides the menu initially */
+        transition: clip-path 0.4s ease-in-out;
+    }
+
+    /* Shown state for mobile menu (Added by JS) */
+    .nav-links.active {
+        clip-path: circle(150% at top right); 
+    }
+
+    /* Optional: Animate hamburger into an 'X' */
+    .mobile-menu-btn.open span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .mobile-menu-btn.open span:nth-child(2) {
+        opacity: 0;
+    }
+    .mobile-menu-btn.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
